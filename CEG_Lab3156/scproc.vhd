@@ -8,7 +8,7 @@ entity scproc is
 	MuxOUT,  brAddress, jAddress : OUT STD_LOGIC_VECTOR(7 downto 0);
 	instruction_OUT : OUT STD_LOGIC_VECTOR(31 downto 0);
 	-- wrAddress : OUT STD_LOGIC_VECTOR(4 downto 0); -- , memOUT, rdA, rdB,
-	zeroOut, MemWriteOUT, RegWriteOUT, branchOUT : OUT STD_LOGIC
+	zeroOut, MemWriteOUT, RegWriteOUT, branchOUT, jOUT : OUT STD_LOGIC
 	);
 end entity scproc;
 
@@ -81,13 +81,6 @@ architecture rtl of scproc is
            w0 , w1, w2, w3, w4, w5  : in  STD_LOGIC_VECTOR(7 Downto 0);
            f   : out STD_LOGIC_VECTOR(7 Downto 0));
 	end component mux6to1_8bit;
-	
-	component ALUControl 
-		port(
-        ALUOp: in STD_LOGIC_VECTOR(2 downto 0);
-        f: in STD_LOGIC_VECTOR(5 downto 0);
-        output: out std_logic_vector(2 downto 0));
-	end component ALUControl;
 	
 	component shift_left2_addpc 
 		PORT(
@@ -269,5 +262,5 @@ begin
 	--rdB <= readB;
 	brAddress <= bufBranchAddress;
 	jAddress <= bufJumpADDRESS;
-	--jOuT <= sigJump;
+	jOuT <= sigJump;
 end rtl;
